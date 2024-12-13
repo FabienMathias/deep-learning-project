@@ -1,0 +1,3 @@
+To achieve the desired results, start by running the training script with the specified dataset and hyperparameters to train the CycleGAN model. Once the model is successfully trained, execute the generation script to transform your input photographs into Monet-style paintings. The generated images will be automatically saved in the designated results directory for easy access and review.
+
+All project files were developed collaboratively by our team, with each member contributing to the creation and refinement of the training and generation scripts, model architectures, data preprocessing pipelines, and other essential components. This joint effort ensured a cohesive and successful implementation of the Neural Monet project.
