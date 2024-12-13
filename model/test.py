@@ -33,7 +33,7 @@ def save_image(image, path):
     plt.close()
 
 print("Start generating Monet-style images...")
-for idx, photo in enumerate(photo_test_ds.unbatch().take(10)):
+for idx, photo in enumerate(photo_test_ds.unbatch().take(12)):
     print(f"Processing photo {idx + 1}")
     photo = tf.expand_dims(photo, axis=0)  # Add batch dimension
     fake_monet = generator_g(photo, training=False)

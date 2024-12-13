@@ -13,8 +13,19 @@ from train import generator_g, generator_f
 # generator_f = tf.keras.models.load_model('generator_f.keras')
 
 # Load test datasets
-monet_test_ds = dp.monet_test_ds
-photo_test_ds = dp.photo_test_ds
+#monet_test_ds = dp.monet_test_ds
+#photo_test_ds = dp.photo_test_ds
+# Load the photo test file paths
+photo_test_files = dp.photo_test_files
+print(photo_test_files)
+
+# Create a dataset with images and paths
+def create_test_dataset(file_paths):
+    dataset = tf.data.Dataset.from_tensor_slices(file_paths)
+    dataset = dataset.map(lambda path: (dp.load_and_preprocess_image(path), path))
+    return dataset
+
+photo_test_ds = create_test_dataset(photo_test_files)
 
 # Create directories to save generated images
 os.makedirs('generated_images/monet_style', exist_ok=True)
@@ -33,7 +44,7 @@ def save_image(image, path):
 
 # Generate Monet-style images from photos
 print("Generating Monet-style images from photos...")
-for idx, photo in enumerate(photo_test_ds.unbatch().take(10)):
+for idx, photo in enumerate(photo_test_ds.unbatch().take(15)):
     print(f"Processing photo {idx + 1}")
     photo = tf.expand_dims(photo, axis=0)  # Add batch dimension
     fake_monet = generator_g(photo, training=False)

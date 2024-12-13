@@ -4,8 +4,8 @@ import time
 import matplotlib.pyplot as plt
 
 from data import data_preprocessing as dp
-from generators import build_generator
-from discriminators import build_discriminator
+from generators2 import build_generator
+from discriminators2 import build_discriminator
 
 # Load datasets
 monet_train_ds = dp.monet_train_ds
@@ -42,7 +42,7 @@ discriminator_x_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
 discriminator_y_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
 
 # Checkpoints to save model weights
-checkpoint_path = "./checkpoints"
+checkpoint_path = "simple_model_checkpoints"
 ckpt = tf.train.Checkpoint(
     generator_g=generator_g,
     generator_f=generator_f,
@@ -139,5 +139,5 @@ for epoch in range(EPOCHS):
     print(f'Time taken for epoch {epoch+1} is {time.time()-start:.2f} sec\n')
 
 # Save the final models
-#generator_g.save('generator_g.keras')
-#generator_f.save('generator_f.keras')
+generator_g.save('generator_g.keras')
+generator_f.save('generator_f.keras')
